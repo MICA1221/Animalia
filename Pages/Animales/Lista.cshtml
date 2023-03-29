@@ -1,0 +1,33 @@
+﻿@page
+@model ListaModel
+@using Animalia_Explorer.models
+@{
+    ViewData["Title"] = "Animales";
+}
+<h1>Animales</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Tipo</th>
+            <th>Nombre</th>
+            <th>Edad</th>
+            <th>Sonido</th>
+            <th>Acción - Caminar</th>
+            <th>Acción - Comer</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var animal in Model.Animales)
+        {
+            <tr>
+                <td>@animal.GetType().Name</td>
+                <td>@animal.Nombre</td>
+                <td>@animal.Edad</td>
+                <td>@animal.EmitirSonido()</td>
+                <td>@((animal as IAcciones )?.Caminar() ?? "N/A")</td>
+                <td>@((animal as IAcciones)?.Comer() ?? "N/A")</td>
+            </tr>
+        }
+    </tbody>
+</table>
